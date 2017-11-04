@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _04.CODE_PhoenixRomeo
 {
-    class Program
+    class StartUp
     {
         static void Main(string[] args)
         {
@@ -41,6 +39,16 @@ namespace _04.CODE_PhoenixRomeo
                 }
             }
 
+            CalculatingCreaturesCount(creatureSquadMate, creatureAndCountOfMates);
+
+            foreach (var creature in creatureAndCountOfMates.OrderByDescending(c => c.Value))
+            {
+                Console.WriteLine($"{creature.Key} : {creature.Value}");
+            }
+        }
+
+        private static void CalculatingCreaturesCount(Dictionary<string, List<string>> creatureSquadMate, Dictionary<string, int> creatureAndCountOfMates)
+        {
             foreach (var creature in creatureSquadMate)
             {
                 int count = 0;
@@ -49,22 +57,11 @@ namespace _04.CODE_PhoenixRomeo
                     bool hasThatName = false;
                     if (creatureSquadMate.ContainsKey(creature.Value[i]))
                     {
-                        if (creatureSquadMate[creature.Value[i]].Contains(creature.Key))
-                        {
-                            hasThatName = true;
-                        }
+                        if (creatureSquadMate[creature.Value[i]].Contains(creature.Key)) hasThatName = true;
                     }
-                    if (hasThatName == false)
-                    {
-                        count++;
-                    }
+                    if (hasThatName == false) count++;
                 }
                 creatureAndCountOfMates.Add(creature.Key, count);
-            }
-
-            foreach (var creature in creatureAndCountOfMates.OrderByDescending(c => c.Value))
-            {
-                Console.WriteLine($"{creature.Key} : {creature.Value}");
             }
         }
     }
